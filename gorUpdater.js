@@ -54,7 +54,7 @@ function gorUpdater(ssID) {
   }
 }
 
-// this is the main function to run
+// this is the main function to run, makes sure all the files are updated.
 function doGorUpdate(){
   var spreadsheetList = [
     "1jYv5VzmQIHE572kRBmLouLXMCBddzGyy4ydWGehzLWQ", //Handicap Group A
@@ -64,5 +64,15 @@ function doGorUpdate(){
   ];
   for(k=0; k<=spreadsheetList.length; k++){
     gorUpdater(spreadsheetList[k]);
+  }
+}
+// this is now the main function
+function onEdit(e){
+  // Set a comment on the edited cell to indicate when it was changed.
+  var range = e.range;
+  if (range.getSheet().getName() == 'FormAT' && range.getA1Notation() == 'K1' && range.isChecked()){
+    doGorUpdate();
+    range.setNote('Last modified: ' + new Date());
+    range.uncheck();
   }
 }
