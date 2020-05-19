@@ -16,7 +16,7 @@ function createAndSendDocument() {
     var json = response.getContentText();
     var list = JSON.parse(json);
     
-    str2 = "O" + String(i);
+    var str2 = "O" + String(i);
   
     sheets[2].getRange(str2).setValue(list.Gor);
     
