@@ -1,4 +1,4 @@
-function createAndSendDocument() {
+function gorUpdater() {
   
   var ss = SpreadsheetApp.openById("1zLHxxP20goVDXN39FHGihQDdXcsbZbToVJLDJwwqMvU"); //Enter the spreadsheet id number here
   var sheets = ss.getSheets();
