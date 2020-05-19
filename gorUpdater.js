@@ -24,6 +24,13 @@ function gorUpdater(ssID) {
 //  var ss = SpreadsheetApp.getActiveSpreadsheet(); //This could work too if we have triggers for all the spreadsheets.
   var sheets = ss.getSheets();
   var iMax = sheets[2].getLastRow(); //since the data is contigous and there are no gaps this sets our limit.
+// make values from formulas constant to keep records in line with history  
+  var sourceSheet = ss.getSheetByName('Sonuçlar');
+  var rMax = getLastDataRow(sourceSheet);
+  var strSource1 = 'e2:f' + String(rMax);
+  var strSource2 = 'h2:i' + String(rMax);
+  makeValuesConstant(sourceSheet,strSource1);
+  makeValuesConstant(sourceSheet,strSource2);    
   
   for(i = 2; i <= iMax; i++) { //53 for the Go League, 45 for the Handicap Go League - deprecated, number is now iMax
     
@@ -45,12 +52,6 @@ function gorUpdater(ssID) {
     sheets[2].getRange(str2).setValue(list.Grade.replace(/k/g, " Kyu").replace(/d/g, " Dan")); //formating EGD values to human readable
     
   }
-  var sourceSheet = ss.getSheetByName('Sonuçlar');
-  var rMax = getLastDataRow(sourceSheet);
-  var strSource1 = 'e2:f' + String(rMax);
-  var strSource2 = 'h2:i' + String(rMax);
-  makeValuesConstant(sourceSheet,strSource1);
-  makeValuesConstant(sourceSheet,strSource2);    
 }
 
 // this is the main function to run
